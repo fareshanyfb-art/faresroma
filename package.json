@@ -1,0 +1,6 @@
+{
+  "private": true,
+  "scripts": {"dev":"vercel dev"},
+  "dependencies": {"@vercel/blob":"^2.6.1"},
+  "engines": {"node":">=22"}
+}
