@@ -4,10 +4,7 @@ const PASSWORD = 'love';
 
 export async function POST(req) {
   if (req.headers.get('x-site-password') !== PASSWORD) {
-    return Response.json(
-      { error: 'Unauthorized' },
-      { status: 401 }
-    );
+    return Response.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
   try {
@@ -15,10 +12,7 @@ export async function POST(req) {
     const file = form.get('file');
 
     if (!(file instanceof File)) {
-      return Response.json(
-        { error: 'No file' },
-        { status: 400 }
-      );
+      return Response.json({ error: 'No file' }, { status: 400 });
     }
 
     if (file.size > 25 * 1024 * 1024) {
@@ -32,4 +26,19 @@ export async function POST(req) {
       .replace(/[^a-zA-Z0-9._-]/g, '_');
 
     const blob = await put(
-      `fares-
+      `fares-roma/uploads/${Date.now()}-${safe}`,
+      file,
+      {
+        access: 'public',
+        addRandomSuffix: true
+      }
+    );
+
+    return Response.json({ url: blob.url });
+  } catch (e) {
+    return Response.json(
+      { error: 'Upload failed' },
+      { status: 500 }
+    );
+  }
+}
