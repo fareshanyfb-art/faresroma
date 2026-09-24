@@ -27,7 +27,7 @@ async function blobOptions() {
   }
 
   return {
-    access: 'private',
+    access: 'public',
     oidcToken,
     storeId
   };
