@@ -8,106 +8,1042 @@
 <style>
 :root{--bg:#0b080a;--panel:#151013;--panel2:#1b1418;--text:#f6edf0;--muted:#b9a9ae;--accent:#d88b9e;--accent2:#8e4359;--line:#302329;--paper:#f4eee5;--ink:#30272a}
 *{box-sizing:border-box}html,body{margin:0;min-height:100%;background:#090709;color:var(--text);font-family:Cairo,sans-serif}body{background:radial-gradient(circle at 50% 0,#28151d 0,#100b0e 38%,#090709 100%)}button,input,textarea,select{font:inherit}button{cursor:pointer}.hidden{display:none!important}
+
 /* intro */
 #gate{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:20px;background:#080608;overflow:hidden}.gate-glow{position:absolute;width:360px;height:360px;border-radius:50%;background:#7e304c55;filter:blur(80px);animation:glow 5s ease-in-out infinite}.envelope-wrap{position:relative;width:min(88vw,370px);height:410px;perspective:1200px}.envelope{position:absolute;left:50%;top:45px;transform:translateX(-50%);width:min(84vw,340px);height:215px;background:linear-gradient(145deg,#3a1b26,#241219);border:1px solid #6e394b;border-radius:13px;box-shadow:0 25px 70px #0009;transition:.8s}.env-front{position:absolute;inset:0;overflow:hidden;border-radius:13px}.env-front:before,.env-front:after{content:"";position:absolute;bottom:-2px;width:72%;height:155px;background:#2c151e;border-top:1px solid #6a3446}.env-front:before{right:-17%;transform:skewX(-42deg)}.env-front:after{left:-17%;transform:skewX(42deg)}.flap{position:absolute;top:0;left:0;width:100%;height:115px;background:#4a202d;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:1s;z-index:3}.seal{position:absolute;z-index:5;left:50%;top:88px;transform:translateX(-50%);width:54px;height:54px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:#fff;font-size:24px;box-shadow:0 7px 25px #0007;transition:.7s}.names{position:absolute;z-index:4;inset:0;display:grid;place-items:center;padding-top:130px;font:600 25px 'Playfair Display',serif;direction:ltr}.hint{position:absolute;top:285px;width:100%;text-align:center;color:#bcaeb2;font-size:13px}.envelope.open .flap{transform:rotateX(175deg);z-index:1}.envelope.open .seal{opacity:0;transform:translateX(-50%) scale(.5)}.envelope.open{transform:translateX(-50%) translateY(8px) scale(.98)}
+
 .letter{position:absolute;z-index:10;left:50%;top:12px;width:min(88vw,350px);min-height:330px;background:var(--paper);color:var(--ink);border-radius:6px;padding:28px 23px 24px;box-shadow:0 30px 80px #000b;transform:translate(-50%,135px) scale(.55);opacity:0;pointer-events:none;transition:1s cubic-bezier(.2,.8,.2,1);direction:rtl}.letter.show{transform:translate(-50%,0) scale(1);opacity:1;pointer-events:auto}.letter .tiny{font-size:10px;color:#806d72;letter-spacing:.06em}.letter h1{font:600 24px 'Playfair Display',serif;margin:8px 0 18px;direction:ltr;text-align:left}.typed{font-size:14px;line-height:2.1;white-space:pre-line;min-height:190px}.letter-name{text-align:left;font:600 17px 'Playfair Display',serif;margin-top:8px;direction:ltr}.gate-next{margin-top:13px;width:100%;padding:11px 16px;border:0;border-radius:8px;background:#32232a;color:#fff;opacity:0;transform:translateY(8px);transition:.5s}.gate-next.ready{opacity:1;transform:none}
+
 #password{position:absolute;inset:0;display:grid;place-items:center;padding:24px;opacity:0;pointer-events:none;transition:.7s}.gate.password-mode .envelope-wrap{display:none}.gate.password-mode #password{opacity:1;pointer-events:auto}.pw-card{width:min(90vw,370px);text-align:center}.pw-card .logo{font:600 32px 'Playfair Display',serif;direction:ltr}.pw-card p{color:var(--muted);line-height:1.9;margin:12px 0 22px}.pw-input{width:100%;padding:13px 15px;border:1px solid var(--line);border-radius:10px;background:#120d10;color:#fff;outline:none;text-align:center;direction:ltr}.pw-btn{width:100%;margin-top:10px;padding:13px;border:0;border-radius:10px;background:var(--accent);color:#170b10;font-weight:700}.pw-error{height:22px;color:#df7188;font-size:12px;margin-top:7px}
+
 /* app */
 #app{display:none;max-width:480px;margin:auto;min-height:100vh;padding-bottom:100px}.top{padding:19px 18px 9px;position:sticky;top:0;z-index:30;background:linear-gradient(#0b080af7,#0b080ae8,transparent);backdrop-filter:blur(9px)}.brand{font:600 23px 'Playfair Display',serif;direction:ltr;text-align:center}.progress{height:2px;background:#251b20;margin:10px 2px 0;border-radius:99px;overflow:hidden}.progress span{display:block;height:100%;background:var(--accent);transition:.4s;width:0}.page{display:none;min-height:calc(100vh - 90px);padding:34px 18px 125px;animation:pageIn .45s ease}.page.active{display:block}.page.home-page{padding-top:65px}.hero{text-align:center}.hero h1{font:600 45px 'Playfair Display',serif;direction:ltr;margin:0 0 18px}.hero p{font-size:18px;line-height:1.9;margin:0 auto 24px;color:#eee0e4}.hero .cta,.primary{display:inline-flex;align-items:center;justify-content:center;border:0;background:var(--accent);color:#180b10;border-radius:10px;padding:12px 18px;font-weight:700}.subline{text-align:center;color:var(--muted);font-size:13px;line-height:1.9;margin:30px 0}.section-title{font:600 27px 'Playfair Display',serif;direction:ltr;margin:0 0 7px}.section-sub{color:var(--muted);font-size:13px;margin:0 0 20px}.cards{display:grid;gap:10px}.card{background:linear-gradient(145deg,#181114,#110c0f);border:1px solid var(--line);border-radius:14px;padding:17px}.card .num{color:var(--accent);font-size:11px;letter-spacing:.1em}.card h3{margin:5px 0 7px;font-size:16px}.card p{margin:0;color:#cdbec3;font-size:13px;line-height:1.9}.paper{background:var(--paper);color:var(--ink);border-radius:7px;padding:22px;box-shadow:0 20px 50px #0006}.paper p{font-size:14px;line-height:2.15;margin:0 0 14px}.paper strong{color:#6c3043}.paper .sig{font:600 19px 'Playfair Display',serif;direction:ltr;text-align:left}.manager{background:#130e11;border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:14px}.manager h3{margin:0 0 10px;font-size:16px}.field{width:100%;padding:11px 12px;margin:6px 0;background:#0e0a0c;color:#eee;border:1px solid var(--line);border-radius:9px;outline:none}.field::placeholder{color:#887980}.file-label{display:block;padding:11px;border:1px dashed #674050;border-radius:9px;color:#cdbec3;text-align:center;margin:6px 0;cursor:pointer}.file-label input{display:none}.preview-row{display:flex;gap:7px;overflow:auto;margin-top:8px}.preview-row img{width:72px;height:72px;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
+
 /* chat */
 .chat{display:flex;flex-direction:column;gap:9px;max-height:55vh;overflow:auto;padding:4px 2px 8px}.bubble{max-width:86%;padding:11px 13px;border-radius:14px;line-height:1.85;font-size:13px;white-space:pre-line;box-shadow:0 5px 18px #0003}.bubble.roma{align-self:flex-start;background:#20151a;border:1px solid #4a3039;border-bottom-left-radius:4px}.bubble.fares{align-self:flex-end;background:#6e3448;color:#fff;border-bottom-right-radius:4px}.bubble .meta{display:block;font-size:9px;opacity:.6;margin-top:5px}.chat-empty{text-align:center;color:#8f7f86;padding:22px 10px;font-size:12px}.sender-switch{display:flex;gap:7px;margin-bottom:7px}.sender-switch button{flex:1;border:1px solid var(--line);background:#120d10;color:#bbaab0;border-radius:9px;padding:9px;font-size:12px}.sender-switch button.active{background:#6e3448;color:#fff;border-color:#92516a}.chat-compose textarea{width:100%;min-height:100px;resize:vertical;background:#0e0a0c;color:#eee;border:1px solid var(--line);border-radius:10px;padding:12px;outline:none}.chat-actions{display:flex;gap:8px;margin-top:8px}.chat-actions button{flex:1}
+
+.item-actions{display:flex;gap:6px;margin-top:9px}.item-actions button{border:1px solid var(--line);background:#120d10;color:#cdbec3;border-radius:7px;padding:5px 9px;font-size:10px}.item-actions button.danger{color:#e59aaa}
+
 /* moments/song */
 .moments{display:grid;gap:14px}.moment{background:#130e11;border:1px solid var(--line);border-radius:14px;overflow:hidden}.moment img{width:100%;display:block;max-height:330px;object-fit:cover}.moment-body{padding:15px}.moment h3{margin:0 0 5px}.moment-meta{font-size:11px;color:#a9989e}.moment p{font-size:13px;line-height:1.9;color:#cdbec3}.song{text-align:center;padding:28px 18px;border:1px dashed #53303d;border-radius:15px;background:#110c0f}.song .icon{font-size:35px}.song h3{font:600 21px 'Playfair Display',serif;direction:ltr}.song p{color:var(--muted);font-size:13px;line-height:1.8}
+
 /* open when */
 .envelopes{display:grid;gap:13px}.open-card{position:relative;overflow:visible;height:160px;padding:0;border:0;border-radius:14px;cursor:pointer;background:transparent;perspective:1000px}.env-mini{position:absolute;inset:13px;border:1px solid #6b3b4c;border-radius:10px;background:linear-gradient(145deg,#3a1c28,#1d1117);overflow:hidden;box-shadow:0 14px 30px #0006;transition:transform .35s}.env-mini:before,.env-mini:after{content:"";position:absolute;bottom:-8px;width:75%;height:100px;background:#2c151f;z-index:1}.env-mini:before{right:-19%;transform:skewX(-39deg)}.env-mini:after{left:-19%;transform:skewX(39deg)}.env-flap{position:absolute;z-index:4;top:0;left:0;width:100%;height:75px;background:#4a202d;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .75s cubic-bezier(.2,.8,.2,1)}.env-seal{position:absolute;z-index:6;left:50%;top:50px;transform:translate(-50%,-50%);width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:#d88b9e;box-shadow:0 5px 16px #0008;transition:.35s}.env-label{position:absolute;z-index:7;inset:0;display:grid;place-items:center;padding-top:82px;font:600 15px 'Playfair Display',serif;transition:.35s}.card-paper{position:absolute;z-index:3;left:50%;bottom:14px;width:78%;height:95px;background:var(--paper);color:var(--ink);border-radius:4px;padding:10px 12px;text-align:right;transform:translate(-50%,52px);transition:transform .8s cubic-bezier(.2,.8,.2,1),height .6s,box-shadow .5s;box-shadow:0 10px 25px #0008;opacity:.98}.card-paper small{display:block;color:#806d72;font-size:9px;margin-bottom:3px}.card-paper b{font-size:11px;line-height:1.5;display:block}.open-card:hover .env-mini{transform:translateY(-2px)}.open-card.opening .env-flap{transform:rotateX(175deg)}.open-card.opening .env-seal{opacity:0;transform:translate(-50%,-50%) scale(.35)}.open-card.opening .env-label{opacity:0;transform:translateY(12px)}.open-card.opening .env-mini{transform:translateY(2px)}.open-card.opening .card-paper{transform:translate(-50%,-5px);box-shadow:0 18px 40px #000b}.open-card.opening{animation:cardLift .85s ease}.open-card.opening .env-mini{box-shadow:0 20px 45px #0008}
+
 .modal{position:fixed;inset:0;z-index:80;background:#050405ed;display:none;align-items:center;justify-content:center;padding:20px}.modal.show{display:flex}.modal .letter2{width:min(92vw,390px);max-height:84vh;overflow:auto;background:var(--paper);color:var(--ink);border-radius:8px;padding:25px;transform:translateY(30px) scale(.85);opacity:0;animation:modalIn .45s .05s forwards}.letter2 h2{font:600 22px 'Playfair Display',serif;margin:0 0 15px}.letter2 p{font-size:14px;line-height:2.1;white-space:pre-line}.close{width:100%;margin-top:10px;border:0;border-radius:9px;padding:11px;background:#2e2026;color:#fff}
+
 /* navigation */
 .page-nav{position:fixed;bottom:14px;left:50%;transform:translateX(-50%);z-index:40;width:min(92vw,440px);display:flex;gap:8px}.page-nav button{flex:1;border:0;border-radius:12px;padding:12px;background:#d88b9e;color:#170a0f;font-weight:700;box-shadow:0 10px 30px #0008}.page-nav button.back{background:#21171c;color:#eee;border:1px solid var(--line)}.page-nav button:disabled{opacity:.35;cursor:default}.menu-btn{position:absolute;left:18px;top:18px;border:1px solid var(--line);background:#130e11;color:#ddd;border-radius:9px;padding:5px 8px;font-size:11px}.page-menu{position:fixed;inset:0;z-index:70;background:#070507ef;display:none;padding:80px 20px 30px}.page-menu.show{display:block}.page-menu .menu-list{display:grid;gap:8px;max-width:440px;margin:auto;max-height:78vh;overflow:auto}.page-menu button{border:1px solid var(--line);background:#130e11;color:#eee;border-radius:11px;padding:12px;text-align:right}.page-menu button.active{background:#6e3448}.footer{text-align:center;color:#9d8d93;font-size:12px;padding:25px 0 0}.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%);background:#25181e;color:#fff;padding:9px 14px;border-radius:999px;font-size:12px;opacity:0;pointer-events:none;transition:.3s;z-index:120}.toast.show{opacity:1}
+
 @keyframes glow{50%{transform:scale(1.15);opacity:.7}}@keyframes pageIn{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}@keyframes cardLift{0%{transform:scale(1)}40%{transform:scale(1.015)}100%{transform:scale(1)}}@keyframes modalIn{to{opacity:1;transform:none}}
 </style>
 </head>
+
 <body>
-<div id="gate" class="gate"><div class="gate-glow"></div>
- <div class="envelope-wrap"><div id="env" class="envelope"><div class="flap"></div><div class="seal">♥</div><div class="names">Fares&nbsp; ♥ &nbsp;Roma</div><div class="env-front"></div></div><div class="hint">اضغطي على الظرف</div>
- <div id="introLetter" class="letter"><div class="tiny">A LITTLE SOMETHING FOR YOU</div><h1>Fares ♥ Roma</h1><div id="typed" class="typed"></div><div class="letter-name">Fares</div><button id="toPassword" class="gate-next">ادخلي الحكاية →</button></div></div>
- <div id="password"><div class="pw-card"><div class="logo">Fares ♥ Roma</div><p>المكان ده لينا إحنا وبس.<br>اكتبي الباسورد وادخلي الحكاية.</p><input id="pw" class="pw-input" type="password" placeholder="password" autocomplete="off"><button id="pwBtn" class="pw-btn">ادخلي الحكاية ♥</button><div id="pwError" class="pw-error"></div></div></div>
+
+<div id="gate" class="gate">
+<div class="gate-glow"></div>
+
+<div class="envelope-wrap">
+<div id="env" class="envelope">
+<div class="flap"></div>
+<div class="seal">♥</div>
+<div class="names">Fares&nbsp; ♥ &nbsp;Roma</div>
+<div class="env-front"></div>
+</div>
+
+<div class="hint">اضغطي على الظرف</div>
+
+<div id="introLetter" class="letter">
+<div class="tiny">A LITTLE SOMETHING FOR YOU</div>
+<h1>Fares ♥ Roma</h1>
+<div id="typed" class="typed"></div>
+<div class="letter-name">Fares</div>
+<button id="toPassword" class="gate-next">ادخلي الحكاية →</button>
+</div>
+</div>
+
+<div id="password">
+<div class="pw-card">
+<div class="logo">Fares ♥ Roma</div>
+<p>المكان ده لينا إحنا وبس.<br>اكتبي الباسورد وادخلي الحكاية.</p>
+<input id="pw" class="pw-input" type="password" placeholder="password" autocomplete="off">
+<button id="pwBtn" class="pw-btn">ادخلي الحكاية ♥</button>
+<div id="pwError" class="pw-error"></div>
+</div>
+</div>
 </div>
 
 <div id="app">
-<header class="top"><button class="menu-btn" onclick="toggleMenu()">☰ الصفحات</button><div class="brand">Fares ♥ Roma</div><div class="progress"><span id="progressBar"></span></div></header>
+
+<header class="top">
+<button class="menu-btn" onclick="toggleMenu()">☰ الصفحات</button>
+<div class="brand">Fares ♥ Roma</div>
+<div class="progress"><span id="progressBar"></span></div>
+</header>
+
 <main id="pages">
-<section id="home" class="page active home-page"><div class="hero"><h1>Fares ♥ Roma</h1><p>مش عارف الحكاية دي هتاخدنا لفين<br>بس مبسوط إنك فيها.</p><button class="cta" onclick="nextPage()">ابدئي الحكاية →</button></div><p class="subline">اتكلمنا يوم… ويوم تاني…<br>ومن يومها الكلام مكمل لحد النهارده. ❤️</p><div class="cards"><div class="card"><span class="num">01</span><h3>Our Story</h3><p>الحكاية من أول رسالة لحد النهارده.</p></div><div class="card"><span class="num">02</span><h3>Things About Us</h3><p>شوية حاجات صغيرة تخصنا إحنا.</p></div><div class="card"><span class="num">03</span><h3>Our Moments</h3><p>الذكريات اللي لسه هنجمعها.</p></div><div class="card"><span class="num">04</span><h3>From Fares</h3><p>رسالة مني ليكي ومكان نفضل نتكلم فيه.</p></div><div class="card"><span class="num">05</span><h3>Open When</h3><p>ظروف ورسائل ليها وقتها.</p></div><div class="card"><span class="num">06</span><h3>Our Song</h3><p>لسه ملقيناش الأغنية بتاعتنا 😂❤️</p></div></div></section>
 
-<section id="story" class="page"><h2 class="section-title">Our Story</h2><p class="section-sub">من أول رسالة لحد النهارده.</p><div class="cards"><div class="card"><span class="num">01 — THE FIRST MESSAGE</span><p>في عيد ميلادك، أنا بعتلك:<br><strong>"كل سنة وإنتِ طيبة ❤️"</strong><br>وردك كان:<br><strong>"آخر حد كنت أتوقع إنه يكلمني… بس فرحتني أوي بجد."</strong></p></div><div class="card"><span class="num">02 — NOT QUITE YET</span><p>وقتها إنتِ كنتِ متلخبطة بين حسابي وحساب ابن عمك 😅<br>فالكلام مكملش وقتها، وعدّى تقريبًا سنة...</p></div><div class="card"><span class="num">03 — THE REAL BEGINNING</span><p>وبعد سنة تقريبًا، بعتلك Follow على Instagram.<br>قبلتيه.<br>اتكلمنا يوم...<br>ويوم تاني...<br><strong>ومن يومها الكلام مكمل لحد النهارده. ❤️</strong><br><br><span dir="ltr">And this was only the beginning.</span><br><strong>ولسه باقي الحكاية.</strong></p></div></div></section>
+<section id="home" class="page active home-page">
+<div class="hero">
+<h1>Fares ♥ Roma</h1>
+<p>مش عارف الحكاية دي هتاخدنا لفين<br>بس مبسوط إنك فيها.</p>
+<button class="cta" onclick="nextPage()">ابدئي الحكاية →</button>
+</div>
 
-<section id="us" class="page"><h2 class="section-title">Things About Us</h2><p class="section-sub">شوية حاجات صغيرة تخصنا إحنا.</p><div class="cards"><div class="card"><span class="num">01 — الكلام</span><p>اتكلمنا يوم… ويوم تاني… ومن يومها الكلام مكمل لحد النهارده.</p></div><div class="card"><span class="num">02 — العتاب 😅</span><p><strong>المشكلة مش في العتاب نفسه… المشكلة إن اللي بيكبر المواضيع عندنا هو السكوت والردود الباردة. 😂</strong><br><br><strong>فخلينا نحاول نتكلم، حتى لو الحاجة بسيطة، بدل ما كل واحد يقعد مستني التاني يفهم لوحده. ❤️</strong></p></div><div class="card"><span class="num">03 — الرخامة 😂</span><p><strong>شوية رخامة كده على شوية عبط… عشان أكيد مش هنبقى جد طول الوقت 😂❤️</strong></p></div><div class="card"><span class="num">04 — التفاصيل الصغيرة ✨</span><p><strong>تفاصيل صغيرة كده… بس إحنا بس اللي بنفهم معناها. ❤️</strong></p></div></div></section>
+<p class="subline">اتكلمنا يوم… ويوم تاني…<br>ومن يومها الكلام مكمل لحد النهارده. ❤️</p>
 
-<section id="fares" class="page"><h2 class="section-title">From Fares</h2><p class="section-sub">رسالة مني ليكي… والمكان ده نكمل فيه الكلام.</p><div class="paper"><p>مش عارف أقولك إيه بالظبط، بس لو لسه مش عارفة يعني، فأنتِ بقيتي حاجة مهمة أوي عندي، وحابب إنك تفضلي مكملة معايا.</p><p>وحتى لو الفترة الأخيرة كان فيها شوية مشاكل وعبط وخناقات ملهاش لازمة، فأنا في الآخر شايف إن ده كله مش مستاهل نخسر عشانه حاجة بينا.</p><p>ولو هتسأليني أنا لو هختار إني أنحي كل الوحش اللي حصل بينا الفترة اللي فاتت على جنب، أو حتى لو هيفضل موجود بس إحنا نفضل مقاوحين معاه عشان نفضل مع بعض، فأنا هعمل كده.</p><p>عشان في الآخر، <strong>إنتِ بقيتي حد أنا عايزه يفضل موجود في حياتي. ❤️</strong></p><p>وعشان كده، كل لما تلاقي نفسك زعلانة مني في حاجة، أو في حاجة مضايقاكي ومش عارفة تقوليها، ادخلي اكتبيها هنا وقوليلي بس إني أدخل أشوفها.</p><p><strong>مش عايز أي زعل بينا يكبر تاني عشان حاجة ممكن نتكلم فيها ونحلها. ❤️</strong></p><p class="sig">فارس</p></div><div class="manager chat-compose"><h3>💬 كلام بينا</h3><div id="chatList" class="chat"></div><div class="sender-switch"><button id="senderRoma" class="active" onclick="setSender('roma')">روما</button><button id="senderFares" onclick="setSender('fares')">فارس</button></div><textarea id="chatInput" placeholder="اكتبي رسالتك هنا..."></textarea><div class="chat-actions"><button class="primary" onclick="sendChat()">إرسال ❤️</button><button class="secondary" onclick="clearChat()">مسح المحادثة</button></div></div></section>
+<div class="cards">
+<div class="card"><span class="num">01</span><h3>Our Story</h3><p>الحكاية من أول رسالة لحد النهارده.</p></div>
+<div class="card"><span class="num">02</span><h3>Things About Us</h3><p>شوية حاجات صغيرة تخصنا إحنا.</p></div>
+<div class="card"><span class="num">03</span><h3>Our Moments</h3><p>الذكريات اللي لسه هنجمعها.</p></div>
+<div class="card"><span class="num">04</span><h3>From Fares</h3><p>رسالة مني ليكي ومكان نفضل نتكلم فيه.</p></div>
+<div class="card"><span class="num">05</span><h3>Open When</h3><p>ظروف ورسائل ليها وقتها.</p></div>
+<div class="card"><span class="num">06</span><h3>Our Song</h3><p>لسه ملقيناش الأغنية بتاعتنا 😂❤️</p></div>
+</div>
+</section>
 
-<section id="moments" class="page"><h2 class="section-title">Our Moments</h2><p class="section-sub">صورنا وذكرياتنا.</p><div class="card" style="margin-bottom:12px"><span class="num">✨ OUR FIRST DATE</span><h3>أول ديت</h3><p>ابدأوا من هنا، والتاريخ اختياري.</p></div><div class="manager"><h3>＋ أضيفي ذكرى</h3><input id="momentTitle" class="field" placeholder="اسم الذكرى — مثال: أول ديت"><input id="momentPlace" class="field" placeholder="المكان"><input id="momentDate" class="field" type="date"><textarea id="momentStory" class="field" style="min-height:95px;resize:vertical" placeholder="احكوا عنها بكلمتين..."></textarea><label class="file-label">📷 اختاري الصور <input id="momentFiles" type="file" accept="image/*" multiple></label><div id="momentPreview" class="preview-row"></div><button class="primary" style="width:100%;margin-top:8px" onclick="saveMomentForm()">حفظ الذكرى ❤️</button></div><div id="momentList" class="moments" style="margin-top:14px"></div></section>
+<section id="story" class="page">
+<h2 class="section-title">Our Story</h2>
+<p class="section-sub">من أول رسالة لحد النهارده.</p>
 
-<section id="openwhen" class="page"><h2 class="section-title">Open When</h2><p class="section-sub">افتحي الكارت في وقته.</p><div id="openCards" class="envelopes"></div></section>
+<div class="cards">
+<div class="card">
+<span class="num">01 — THE FIRST MESSAGE</span>
+<p>في عيد ميلادك، أنا بعتلك:<br><strong>"كل سنة وإنتِ طيبة ❤️"</strong><br>وردك كان:<br><strong>"آخر حد كنت أتوقع إنه يكلمني… بس فرحتني أوي بجد."</strong></p>
+</div>
 
-<section id="song" class="page"><div class="song"><div class="icon">🎵</div><h3>OUR SONG</h3><p id="songStatus">لسه ملقيناش الأغنية بتاعتنا… 😂❤️<br>بس أول ما نلاقيها، مكانها محفوظ هنا.</p><div class="manager" style="text-align:right"><input id="songTitle" class="field" placeholder="اسم الأغنية"><input id="songArtist" class="field" placeholder="المطرب / الفرقة (اختياري)"><label class="file-label">🎵 اختاري ملف الأغنية <input id="songFile" type="file" accept="audio/*"></label><button class="primary" style="width:100%;margin-top:8px" onclick="saveSong()">حفظ أغنيتنا ❤️</button><div id="songPlayer" style="margin-top:12px"></div></div></div></section>
+<div class="card">
+<span class="num">02 — NOT QUITE YET</span>
+<p>وقتها إنتِ كنتِ متلخبطة بين حسابي وحساب ابن عمك 😅<br>فالكلام مكملش وقتها، وعدّى تقريبًا سنة...</p>
+</div>
+
+<div class="card">
+<span class="num">03 — THE REAL BEGINNING</span>
+<p>وبعد سنة تقريبًا، بعتلك Follow على Instagram.<br>قبلتيه.<br>اتكلمنا يوم...<br>ويوم تاني...<br><strong>ومن يومها الكلام مكمل لحد النهارده. ❤️</strong><br><br><span dir="ltr">And this was only the beginning.</span><br><strong>ولسه باقي الحكاية.</strong></p>
+</div>
+</div>
+</section>
+
+<section id="us" class="page">
+<h2 class="section-title">Things About Us</h2>
+<p class="section-sub">شوية حاجات صغيرة تخصنا إحنا.</p>
+
+<div class="cards">
+<div class="card"><span class="num">01 — الكلام</span><p>اتكلمنا يوم… ويوم تاني… ومن يومها الكلام مكمل لحد النهارده.</p></div>
+
+<div class="card">
+<span class="num">02 — العتاب 😅</span>
+<p><strong>المشكلة مش في العتاب نفسه… المشكلة إن اللي بيكبر المواضيع عندنا هو السكوت والردود الباردة. 😂</strong><br><br><strong>فخلينا نحاول نتكلم، حتى لو الحاجة بسيطة، بدل ما كل واحد يقعد مستني التاني يفهم لوحده. ❤️</strong></p>
+</div>
+
+<div class="card"><span class="num">03 — الرخامة 😂</span><p><strong>شوية رخامة كده على شوية عبط… عشان أكيد مش هنبقى جد طول الوقت 😂❤️</strong></p></div>
+
+<div class="card"><span class="num">04 — التفاصيل الصغيرة ✨</span><p><strong>تفاصيل صغيرة كده… بس إحنا بس اللي بنفهم معناها. ❤️</strong></p></div>
+</div>
+</section>
+
+<section id="fares" class="page">
+<h2 class="section-title">From Fares</h2>
+<p class="section-sub">رسالة مني ليكي… والمكان ده نكمل فيه الكلام.</p>
+
+<div class="paper">
+<p>مش عارف أقولك إيه بالظبط، بس لو لسه مش عارفة يعني، فأنتِ بقيتي حاجة مهمة أوي عندي، وحابب إنك تفضلي مكملة معايا.</p>
+
+<p>وحتى لو الفترة الأخيرة كان فيها شوية مشاكل وعبط وخناقات ملهاش لازمة، فأنا في الآخر شايف إن ده كله مش مستاهل نخسر عشانه حاجة بينا.</p>
+
+<p>ولو هتسأليني أنا لو هختار إني أنحي كل الوحش اللي حصل بينا الفترة اللي فاتت على جنب، أو حتى لو هيفضل موجود بس إحنا نفضل مقاوحين معاه عشان نفضل مع بعض، فأنا هعمل كده.</p>
+
+<p>عشان في الآخر، <strong>إنتِ بقيتي حد أنا عايزه يفضل موجود في حياتي. ❤️</strong></p>
+
+<p>وعشان كده، كل لما تلاقي نفسك زعلانة مني في حاجة، أو في حاجة مضايقاكي ومش عارفة تقوليها، ادخلي اكتبيها هنا وقوليلي بس إني أدخل أشوفها.</p>
+
+<p><strong>مش عايز أي زعل بينا يكبر تاني عشان حاجة ممكن نتكلم فيها ونحلها. ❤️</strong></p>
+
+<p class="sig">فارس</p>
+</div>
+
+<div class="manager chat-compose">
+<h3>💬 كلام بينا</h3>
+
+<div id="chatList" class="chat"></div>
+
+<div class="sender-switch">
+<button id="senderRoma" class="active" onclick="setSender('roma')">روما</button>
+<button id="senderFares" onclick="setSender('fares')">فارس</button>
+</div>
+
+<textarea id="chatInput" placeholder="اكتبي رسالتك هنا..."></textarea>
+
+<div class="chat-actions">
+<button class="primary" onclick="sendChat()">إرسال ❤️</button>
+<button class="secondary" onclick="clearChat()">مسح المحادثة</button>
+</div>
+</div>
+</section>
+
+<section id="moments" class="page">
+<h2 class="section-title">Our Moments</h2>
+<p class="section-sub">صورنا وذكرياتنا.</p>
+
+<div class="card" style="margin-bottom:12px">
+<span class="num">✨ OUR FIRST DATE</span>
+<h3>أول ديت</h3>
+<p>ابدأوا من هنا، والتاريخ اختياري.</p>
+</div>
+
+<div class="manager">
+<h3>＋ أضيفي ذكرى</h3>
+<input id="momentTitle" class="field" placeholder="اسم الذكرى — مثال: أول ديت">
+<input id="momentPlace" class="field" placeholder="المكان">
+<input id="momentDate" class="field" type="date">
+<textarea id="momentStory" class="field" style="min-height:95px;resize:vertical" placeholder="احكوا عنها بكلمتين..."></textarea>
+
+<label class="file-label">
+📷 اختاري الصور
+<input id="momentFiles" type="file" accept="image/*" multiple>
+</label>
+
+<div id="momentPreview" class="preview-row"></div>
+
+<button class="primary" style="width:100%;margin-top:8px" onclick="saveMomentForm()">حفظ الذكرى ❤️</button>
+</div>
+
+<div id="momentList" class="moments" style="margin-top:14px"></div>
+</section>
+
+<section id="openwhen" class="page">
+<h2 class="section-title">Open When</h2>
+<p class="section-sub">افتحي الكارت في وقته.</p>
+<div id="openCards" class="envelopes"></div>
+</section>
+
+<section id="song" class="page">
+<div class="song">
+<div class="icon">🎵</div>
+<h3>OUR SONG</h3>
+<p id="songStatus">لسه ملقيناش الأغنية بتاعتنا… 😂❤️<br>بس أول ما نلاقيها، مكانها محفوظ هنا.</p>
+
+<div class="manager" style="text-align:right">
+<input id="songTitle" class="field" placeholder="اسم الأغنية">
+<input id="songArtist" class="field" placeholder="المطرب / الفرقة (اختياري)">
+
+<label class="file-label">
+🎵 اختاري ملف الأغنية
+<input id="songFile" type="file" accept="audio/*">
+</label>
+
+<button class="primary" style="width:100%;margin-top:8px" onclick="saveSong()">حفظ أغنيتنا ❤️</button>
+<div id="songPlayer" style="margin-top:12px"></div>
+</div>
+</div>
+</section>
 
 <section id="customPages"></section>
+
 </main>
-<div class="page-nav"><button id="backBtn" class="back" onclick="prevPage()">← السابقة</button><button id="nextBtn" onclick="nextPage()">التالية →</button></div>
-<div id="pageMenu" class="page-menu"><div class="menu-list" id="menuList"></div><button class="primary" style="width:100%;margin-top:10px" onclick="newPage()">＋ صفحة جديدة</button></div>
+
+<div class="page-nav">
+<button id="backBtn" class="back" onclick="prevPage()">← السابقة</button>
+<button id="nextBtn" onclick="nextPage()">التالية →</button>
 </div>
-<div id="modal" class="modal"><div class="letter2"><h2 id="modalTitle"></h2><p id="modalText"></p><button class="close" onclick="closeModal()">اقفلي الكارت ❤️</button></div></div>
+
+<div id="pageMenu" class="page-menu">
+<div class="menu-list" id="menuList"></div>
+<button class="primary" style="width:100%;margin-top:10px" onclick="newPage()">＋ صفحة جديدة</button>
+</div>
+
+</div>
+
+<div id="modal" class="modal">
+<div class="letter2">
+<h2 id="modalTitle"></h2>
+<p id="modalText"></p>
+<button class="close" onclick="closeModal()">اقفلي الكارت ❤️</button>
+</div>
+</div>
+
 <div id="toast" class="toast"></div>
+
 <script>
+
 const openWhen=[
-['🥺','افتحي الكارت لما تكوني زعلانة مني',`أنا أصلًا وأنا بعمل الموقع ده مكنتش ناوي أكتب حاجة في الكروت دي دلوقتي، وكنت بقول كل كارت هيبقى ليه وقته… بس وأنا بفكر في الكارت ده حسيت إني لازم أكتبه من دلوقتي، ومنه قررت إني أكتبلك الكروت كلها من دلوقتي.\n\nعشان في حاجة عايز أفكرك بيها، وأفكر نفسي بيها أنا كمان...\n\nأول حاجة عايزك تعرفي إني بحبك جدًا، ومش سهل عليا إنك تزعلي مني، ولا إنك تضطري تفتحي المسج دي أصلًا.\n\nفلو إنتِ هنا دلوقتي، عايزك فابعتيلي وتقوليلي إنك قريتي المسج، وخلينا نتكلم في اللي مضايقك.\n\nزعلك بيفرقلي جدًا، ومش عايزك تفضلي زعلانة مني. ❤️\n\nوأنا متأكد إنك مش هتفضلي زعلانة.`],
-['🫂','افتحي الكارت لما تكوني مضايقة',`لو إنتِ بتقري الكارت ده دلوقتي، فغالبًا في حاجة مضايقاكي، وممكن تكون حاجة تخصني أو حاجة ملهاش علاقة بيا.\n\nبس في الحالتين، عايزك تعرفي إنك مش لازم تفضلي شايلة الحاجة لوحدك.\n\nلو حابة تحكيلي، احكيلي حتى لو مش عارفة ترتبي كلامك أو مش عارفة تبدأي منين. أنا هسمعك.\n\nولو مش عايزة تتكلمي دلوقتي، مفيش مشكلة، خدي وقتك براحتك… بس متختفيش مني.\n\nولو أنا السبب في إنك مضايقة، قوليلي. حتى لو الكلام مش هيعجبني، المهم أفهمك. ❤️\n\nوأنا موجود… سواء عايزة تتكلمي، تشتكي، أو حتى ترميلي شوية رخامة 😂❤️`],
-['❤️','افتحي الكارت لما تفتقديني',`لو فتحتي الكارت ده، يبقى غالبًا وحشتك… أو يمكن أنا اللي وحشتك ومش عايزة تعترفي 😂❤️\n\nبس بصراحة، أنا مبسوط إنك فتحتيه أصلًا.\n\nعايزك تعرفي إن حتى لو إحنا مش بنتكلم دلوقتي، أو كل واحد فينا مشغول في حاجة، ده مش معناه إنك بعيدة عني.\n\nولو وحشتك بجد… متقعديش تستني، ابعتيلي. ❤️\n\nوأنا هكون مبسوط جدًا إنك افتكرتيني. 🫂❤️`],
-['😤','افتحي الكارت لما نكون متخانقين',`لو إنتِ فتحتي الكارت ده، يبقى إحنا غالبًا متخانقين… ودي حاجة أنا أصلًا مش بحبها 😂\n\nبس عايز أفكرك بحاجة، إن مهما كان إحنا متضايقين من بعض دلوقتي، ده مش معناه إن كل حاجة حلوة بينا اختفت.\n\nممكن أكون متضايق منك، وممكن تكوني متضايقة مني، وممكن كل واحد فينا شايف إن التاني هو الغلطان… بس في الآخر إحنا الاتنين مش المفروض نبقى ضد بعض.\n\nفلو إحنا متخانقين، خلينا نفتكر إن إحنا أصلًا عايزين نفضل مع بعض، ونحاول نحل اللي حصل بدل ما نكبره.\n\nولو مستنية إني أبدأ الكلام… خلاص اعتبري الكارت ده أنا بدأت بيه. 😂❤️`],
-['🥰','افتحي الكارت لما تكوني مبسوطة',`لو إنتِ فتحتي الكارت ده وإنتِ مبسوطة، فـ أنا عايز أكون جزء من الفرحة دي حتى لو أنا مش السبب فيها. ❤️\n\nاحكيلي إيه اللي باسطك، حتى لو حاجة صغيرة أوي… أنا بحب أعرف التفاصيل اللي تخصك.\n\nولو أنا السبب في إنك مبسوطة، فـ خلاص بقى 😂❤️\nاعتبري إنك كده خليتيني مبسوط أكتر منك.\n\nومتنسيش تبعتيلي وتقوليلي إنك فتحتي الكارت ده… عايز أعرف إيه اللي مخليكي مبسوطة. ❤️`],
-['👀','افتحي الكارت لما تحسي إنك محتاجة تسمعي مني حاجة',`مش عارف إنتِ فتحتي الكارت ده عشان محتاجة تسمعي مني حاجة معينة، ولا عشان بس حبيتي تشوفي أنا هقولك إيه 😂❤️\n\nبس بما إنك هنا، فـ هقولك حاجة يمكن تكوني محتاجة تسمعيها:\n\nأنا بحبك، وإنتِ مهمة عندي، ومهما حصل بينا أنا مش شايف إن وجودك في حياتي حاجة عادية. ❤️\n\nولو كان في حاجة معينة نفسك تسمعيها مني ومقولتهاش، قوليلي… بدل ما تفضلي مستنية إني أفهم لوحدي 😂❤️`]
+['🥺','افتحي الكارت لما تكوني زعلانة مني',`أنا أصلًا وأنا بعمل الموقع ده مكنتش ناوي أكتب حاجة في الكروت دي دلوقتي، وكنت بقول كل كارت هيبقى ليه وقته… بس وأنا بفكر في الكارت ده حسيت إني لازم أكتبه من دلوقتي، ومنه قررت إني أكتبلك الكروت كلها من دلوقتي.
+
+عشان في حاجة عايز أفكرك بيها، وأفكر نفسي بيها أنا كمان...
+
+أول حاجة عايزك تعرفي إني بحبك جدًا، ومش سهل عليا إنك تزعلي مني، ولا إنك تضطري تفتحي المسج دي أصلًا.
+
+فلو إنتِ هنا دلوقتي، عايزك فابعتيلي وتقوليلي إنك قريتي المسج، وخلينا نتكلم في اللي مضايقك.
+
+زعلك بيفرقلي جدًا، ومش عايزك تفضلي زعلانة مني. ❤️
+
+وأنا متأكد إنك مش هتفضلي زعلانة.`],
+
+['🫂','افتحي الكارت لما تكوني مضايقة',`لو إنتِ بتقري الكارت ده دلوقتي، فغالبًا في حاجة مضايقاكي، وممكن تكون حاجة تخصني أو حاجة ملهاش علاقة بيا.
+
+بس في الحالتين، عايزك تعرفي إنك مش لازم تفضلي شايلة الحاجة لوحدك.
+
+لو حابة تحكيلي، احكيلي حتى لو مش عارفة ترتبي كلامك أو مش عارفة تبدأي منين. أنا هسمعك.
+
+ولو مش عايزة تتكلمي دلوقتي، مفيش مشكلة، خدي وقتك براحتك… بس متختفيش مني.
+
+ولو أنا السبب في إنك مضايقة، قوليلي. حتى لو الكلام مش هيعجبني، المهم أفهمك. ❤️
+
+وأنا موجود… سواء عايزة تتكلمي، تشتكي، أو حتى ترميلي شوية رخامة 😂❤️`],
+
+['❤️','افتحي الكارت لما تفتقديني',`لو فتحتي الكارت ده، يبقى غالبًا وحشتك… أو يمكن أنا اللي وحشتك ومش عايزة تعترفي 😂❤️
+
+بس بصراحة، أنا مبسوط إنك فتحتيه أصلًا.
+
+عايزك تعرفي إن حتى لو إحنا مش بنتكلم دلوقتي، أو كل واحد فينا مشغول في حاجة، ده مش معناه إنك بعيدة عني.
+
+ولو وحشتك بجد… متقعديش تستني، ابعتيلي. ❤️
+
+وأنا هكون مبسوط جدًا إنك افتكرتيني. 🫂❤️`],
+
+['😤','افتحي الكارت لما نكون متخانقين',`لو إنتِ فتحتي الكارت ده، يبقى إحنا غالبًا متخانقين… ودي حاجة أنا أصلًا مش بحبها 😂
+
+بس عايز أفكرك بحاجة، إن مهما كان إحنا متضايقين من بعض دلوقتي، ده مش معناه إن كل حاجة حلوة بينا اختفت.
+
+ممكن أكون متضايق منك، وممكن تكوني متضايقة مني، وممكن كل واحد فينا شايف إن التاني هو الغلطان… بس في الآخر إحنا الاتنين مش المفروض نبقى ضد بعض.
+
+فلو إحنا متخانقين، خلينا نفتكر إن إحنا أصلًا عايزين نفضل مع بعض، ونحاول نحل اللي حصل بدل ما نكبره.
+
+ولو مستنية إني أبدأ الكلام… خلاص اعتبري الكارت ده أنا بدأت بيه. 😂❤️`],
+
+['🥰','افتحي الكارت لما تكوني مبسوطة',`لو إنتِ فتحتي الكارت ده وإنتِ مبسوطة، فـ أنا عايز أكون جزء من الفرحة دي حتى لو أنا مش السبب فيها. ❤️
+
+احكيلي إيه اللي باسطك، حتى لو حاجة صغيرة أوي… أنا بحب أعرف التفاصيل اللي تخصك.
+
+ولو أنا السبب في إنك مبسوطة، فـ خلاص بقى 😂❤️
+اعتبري إنك كده خليتيني مبسوط أكتر منك.
+
+ومتنسيش تبعتيلي وتقوليلي إنك فتحتي الكارت ده… عايز أعرف إيه اللي مخليكي مبسوطة. ❤️`],
+
+['👀','افتحي الكارت لما تحسي إنك محتاجة تسمعي مني حاجة',`مش عارف إنتِ فتحتي الكارت ده عشان محتاجة تسمعي مني حاجة معينة، ولا عشان بس حبيتي تشوفي أنا هقولك إيه 😂❤️
+
+بس بما إنك هنا، فـ هقولك حاجة يمكن تكوني محتاجة تسمعيها:
+
+أنا بحبك، وإنتِ مهمة عندي، ومهما حصل بينا أنا مش شايف إن وجودك في حياتي حاجة عادية. ❤️
+
+ولو كان في حاجة معينة نفسك تسمعيها مني ومقولتهاش، قوليلي… بدل ما تفضلي مستنية إني أفهم لوحدي 😂❤️`]
 ];
-const basePages=[['home','Home'],['story','Our Story'],['us','About Us'],['fares','From Fares'],['moments','Moments'],['openwhen','Open When'],['song','Our Song']];
+
+const basePages=[
+['home','Home'],
+['story','Our Story'],
+['us','About Us'],
+['fares','From Fares'],
+['moments','Moments'],
+['openwhen','Open When'],
+['song','Our Song']
+];
+
 function $(x){return document.getElementById(x)}
-function toast(t){$('toast').textContent=t;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),1800)}
-function escapeHtml(s){return String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
-let current=0,sender='roma',momentSelectedFiles=[],remoteData={chat:[],moments:[],song:null,pages:[]};
-function $(x){return document.getElementById(x)}
-function toast(t){$('toast').textContent=t;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),1800)}
-function escapeHtml(s){return String(s??'').replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]))}
-function apiHeaders(){return {'x-site-password':'love'}}
-async function apiGet(){const r=await fetch('/api/data',{headers:apiHeaders(),cache:'no-store'});if(!r.ok)throw new Error('read');return await r.json()}
-async function apiSave(){const r=await fetch('/api/data',{method:'POST',headers:{...apiHeaders(),'Content-Type':'application/json'},body:JSON.stringify(remoteData)});if(!r.ok)throw new Error('save');remoteData=await r.json().then(x=>x.data)}
-async function uploadFile(file){const f=new FormData();f.append('file',file);const r=await fetch('/api/upload',{method:'POST',headers:apiHeaders(),body:f});if(!r.ok)throw new Error('upload');return (await r.json()).url}
-function allPageIds(){return [...basePages.map(x=>x[0]),...remoteData.pages.map((_,i)=>'custom'+i)]}
-function allPageLabels(){return [...basePages.map(x=>x[1]),...remoteData.pages.map(x=>x.title)]}
-function showPage(index){const ids=allPageIds();if(index<0||index>=ids.length)return;current=index;document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));const el=$(ids[index]);if(el)el.classList.add('active');updateNav();window.scrollTo({top:0,behavior:'smooth'});closeMenu()}
+
+function toast(t){
+$('toast').textContent=t;
+$('toast').classList.add('show');
+setTimeout(()=>$('toast').classList.remove('show'),1800)
+}
+
+function escapeHtml(s){
+return String(s??'').replace(/[&<>'"]/g,c=>({
+'&':'&amp;',
+'<':'&lt;',
+'>':'&gt;',
+"'":'&#39;',
+'"':'&quot;'
+}[c]))
+}
+
+let current=0;
+let sender='roma';
+let momentSelectedFiles=[];
+let remoteData={chat:[],moments:[],song:null,pages:[]};
+
+function apiHeaders(){
+return {'x-site-password':'love'}
+}
+
+async function apiGet(){
+const r=await fetch('/api/data',{headers:apiHeaders(),cache:'no-store'});
+if(!r.ok)throw new Error('read');
+return await r.json()
+}
+
+async function apiSave(){
+const r=await fetch('/api/data',{
+method:'POST',
+headers:{...apiHeaders(),'Content-Type':'application/json'},
+body:JSON.stringify(remoteData)
+});
+if(!r.ok)throw new Error('save');
+remoteData=await r.json().then(x=>x.data)
+}
+
+async function uploadFile(file){
+const f=new FormData();
+f.append('file',file);
+const r=await fetch('/api/upload',{
+method:'POST',
+headers:apiHeaders(),
+body:f
+});
+if(!r.ok)throw new Error('upload');
+return (await r.json()).url
+}
+
+function allPageIds(){
+return [...basePages.map(x=>x[0]),...remoteData.pages.map((_,i)=>'custom'+i)]
+}
+
+function allPageLabels(){
+return [...basePages.map(x=>x[1]),...remoteData.pages.map(x=>x.title)]
+}
+
+function showPage(index){
+const ids=allPageIds();
+if(index<0||index>=ids.length)return;
+
+current=index;
+
+document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+
+const el=$(ids[index]);
+if(el)el.classList.add('active');
+
+updateNav();
+window.scrollTo({top:0,behavior:'smooth'});
+closeMenu()
+}
+
 function nextPage(){showPage(current+1)}
 function prevPage(){showPage(current-1)}
-function updateNav(){const ids=allPageIds(),labels=allPageLabels();$('backBtn').disabled=current===0;$('nextBtn').disabled=current===ids.length-1;$('nextBtn').textContent=current===ids.length-1?'خلصت الحكاية ❤️':'التالية →';$('progressBar').style.width=((current)/(Math.max(ids.length-1,1))*100)+'%';buildMenu(ids,labels,current)}
-function buildMenu(ids,labels,active){$('menuList').innerHTML=labels.map((x,i)=>`<button class="${i===active?'active':''}" onclick="showPage(${i})">${i+1}. ${escapeHtml(x)}</button>`).join('')}
-function toggleMenu(){$('pageMenu').classList.toggle('show')}
-function closeMenu(){$('pageMenu').classList.remove('show')}
-function typeText(el,text,speed=22){el.textContent='';let i=0;function tick(){if(i<text.length){el.textContent+=text[i++];setTimeout(tick,speed)}else $('toPassword').classList.add('ready')}tick()}
-$('env').addEventListener('click',()=>{if($('env').classList.contains('open'))return;$('env').classList.add('open');setTimeout(()=>{$('introLetter').classList.add('show');setTimeout(()=>typeText($('typed'),`مش عارف الحكاية دي هتاخدنا لفين\nبس مبسوط إنك فيها.\n\nوأنا مش من النوع اللي بيحب يسيب الحاجات الحلوة تعدي وخلاص\nفقولت أعملك حاجة تفضل تجمع كل اللي بينا\nمن أول الحكاية\nوكل حاجة جاية بعدها.`),650)},650)});
-$('toPassword').onclick=()=>{$('gate').classList.add('password-mode')};$('pwBtn').onclick=unlock;$('pw').addEventListener('keydown',e=>{if(e.key==='Enter')unlock()});
-async function unlock(){if($('pw').value!=='love'){$('pwError').textContent='الباسورد مش ده 😅';return}sessionStorage.setItem('fr_unlocked','1');$('gate').style.display='none';$('app').style.display='block';await init()}
-async function init(){try{remoteData=await apiGet()}catch(e){toast('الموقع محتاج ربط Vercel Storage الأول');return}buildOpen();renderPages();renderChat();renderMoments();initMomentPicker();renderSong();showPage(0)}
-function buildOpen(){$('openCards').innerHTML=openWhen.map((x,i)=>`<button class="open-card" onclick="openModal(${i},this)"><span class="env-mini"><span class="env-flap"></span><span class="env-seal">♥</span><span class="env-label">${escapeHtml(x[1])}</span></span><span class="card-paper"><small>Fares ♥ Roma</small><b>افتحي الكارت ❤️</b></span></button>`).join('')}
-function openModal(i,el){if(el.classList.contains('opening'))return;el.classList.add('opening');setTimeout(()=>{$('modalTitle').textContent=openWhen[i][1];$('modalText').textContent=openWhen[i][2];$('modal').classList.add('show')},800)}
-function closeModal(){$('modal').classList.remove('show');setTimeout(()=>document.querySelectorAll('.open-card.opening').forEach(x=>x.classList.remove('opening')),250)}
-function setSender(x){sender=x;$('senderRoma').classList.toggle('active',x==='roma');$('senderFares').classList.toggle('active',x==='fares');$('chatInput').placeholder=x==='roma'?'اكتبي رسالتك هنا...':'اكتب رسالتك هنا...'}
-async function sendChat(){const text=$('chatInput').value.trim();if(!text)return;remoteData.chat.push({sender,text,time:new Date().toLocaleString('ar-EG',{dateStyle:'short',timeStyle:'short'})});try{await apiSave();$('chatInput').value='';renderChat();toast('اتحفظت الرسالة ❤️')}catch(e){remoteData.chat.pop();toast('حصلت مشكلة في الحفظ')}}
-function renderChat(){let a=remoteData.chat||[];$('chatList').innerHTML=a.length?a.map(m=>`<div class="bubble ${m.sender==='roma'?'roma':'fares'}"><span>${escapeHtml(m.text)}</span><span class="meta">${m.sender==='roma'?'Roma':'Fares'} · ${escapeHtml(m.time||'')}</span></div>`).join(''):'<div class="chat-empty">لسه مفيش رسايل هنا... ابدأوا الكلام من هنا ❤️</div>';$('chatList').scrollTop=$('chatList').scrollHeight}
-async function clearChat(){if(!confirm('تمسحوا كل الرسايل؟'))return;const old=remoteData.chat;remoteData.chat=[];try{await apiSave();renderChat();toast('المحادثة اتمسحت')}catch(e){remoteData.chat=old;toast('حصلت مشكلة في الحفظ')}}
-function initMomentPicker(){const input=$('momentFiles');if(!input)return;input.onchange=()=>{momentSelectedFiles=[...input.files];$('momentPreview').innerHTML='';momentSelectedFiles.forEach(f=>{const r=new FileReader();r.onload=()=>{$('momentPreview').insertAdjacentHTML('beforeend',`<img src="${r.result}">`)};r.readAsDataURL(f)})}}
-async function saveMomentForm(){const title=$('momentTitle').value.trim()||'ذكرى جديدة',place=$('momentPlace').value.trim(),date=$('momentDate').value,story=$('momentStory').value.trim(),files=[...momentSelectedFiles];try{const imgs=[];for(const f of files)imgs.push(await uploadFile(f));remoteData.moments.push({title,place,date,story,imgs});await apiSave();renderMoments();resetMomentForm();toast('اتضافت الذكرى ❤️')}catch(e){toast('حصلت مشكلة في رفع الذكرى')}}
-function resetMomentForm(){$('momentTitle').value='';$('momentPlace').value='';$('momentDate').value='';$('momentStory').value='';$('momentFiles').value='';$('momentPreview').innerHTML='';momentSelectedFiles=[]}
-function renderMoments(){let a=remoteData.moments||[];$('momentList').innerHTML=a.length?a.map((m,i)=>`<article class="moment">${(m.imgs||[]).map(s=>`<img src="${s}">`).join('')}<div class="moment-body"><h3>${escapeHtml(m.title)}</h3><div class="moment-meta">${escapeHtml(m.place||'')}${m.date?' · '+escapeHtml(m.date):''}</div><p>${escapeHtml(m.story||'')}</p><button class="secondary" onclick="deleteMoment(${i})">مسح الذكرى</button></div></article>`).join(''):'<div class="card"><p>لسه بنجمع الذكريات...<br>بس أول واحدة لسه مستنيينها. ❤️</p></div>'}
-async function deleteMoment(i){const old=remoteData.moments;remoteData.moments=old.filter((_,n)=>n!==i);try{await apiSave();renderMoments()}catch(e){remoteData.moments=old;toast('حصلت مشكلة في الحفظ')}}
-async function saveSong(){const title=$('songTitle').value.trim(),artist=$('songArtist').value.trim(),f=$('songFile').files[0];if(!title&&!f){toast('اكتبي اسم الأغنية أو اختاري الملف');return}try{const src=f?await uploadFile(f):'';remoteData.song={title:title||f.name.replace(/\.[^.]+$/,''),artist,src};await apiSave();renderSong();toast('اتحفظت الأغنية ❤️')}catch(e){toast('حصلت مشكلة في رفع الأغنية')}}
-function renderSong(){const x=remoteData.song;if(!x)return;$('songStatus').innerHTML=`<strong>${escapeHtml(x.title)}</strong>${x.artist?' · '+escapeHtml(x.artist):''}<br>أغنيتنا اتسجلت هنا ❤️`;$('songTitle').value=x.title||'';$('songArtist').value=x.artist||'';$('songPlayer').innerHTML=x.src?`<audio controls style="width:100%" src="${x.src}"></audio>`:'<div style="color:#9d8d93;font-size:12px">مفيش ملف صوتي مرفوع، بس اسم الأغنية محفوظ.</div>'}
-async function newPage(){const title=prompt('اسم الصفحة؟');if(!title)return;const text=prompt('اكتبي محتوى الصفحة؟','');remoteData.pages.push({title,text});try{await apiSave();renderPages();updateNav();showPage(allPageIds().length-1);toast('اتضافت الصفحة ❤️')}catch(e){remoteData.pages.pop();toast('حصلت مشكلة في الحفظ')}}
-function renderPages(){document.querySelectorAll('.custom-page').forEach(x=>x.remove());const holder=$('customPages');holder.innerHTML='';(remoteData.pages||[]).forEach((p,i)=>{let s=document.createElement('section');s.className='page custom-page';s.id='custom'+i;s.innerHTML=`<h2 class="section-title">${escapeHtml(p.title)}</h2><div class="paper"><p>${escapeHtml(p.text||'')}</p></div>`;holder.appendChild(s)})}
-if(sessionStorage.getItem('fr_unlocked')==='1'){$('gate').style.display='none';$('app').style.display='block';init()}
+
+function updateNav(){
+const ids=allPageIds();
+const labels=allPageLabels();
+
+$('backBtn').disabled=current===0;
+$('nextBtn').disabled=current===ids.length-1;
+
+$('nextBtn').textContent=
+current===ids.length-1
+?'خلصت الحكاية ❤️'
+:'التالية →';
+
+$('progressBar').style.width=
+((current)/(Math.max(ids.length-1,1))*100)+'%';
+
+buildMenu(ids,labels,current)
+}
+
+function buildMenu(ids,labels,active){
+$('menuList').innerHTML=
+labels.map((x,i)=>
+`<button class="${i===active?'active':''}" onclick="showPage(${i})">${i+1}. ${escapeHtml(x)}</button>`
+).join('')
+}
+
+function toggleMenu(){
+$('pageMenu').classList.toggle('show')
+}
+
+function closeMenu(){
+$('pageMenu').classList.remove('show')
+}
+
+function typeText(el,text,speed=22){
+el.textContent='';
+let i=0;
+
+function tick(){
+if(i<text.length){
+el.textContent+=text[i++];
+setTimeout(tick,speed)
+}else{
+$('toPassword').classList.add('ready')
+}
+}
+
+tick()
+}
+
+$('env').addEventListener('click',()=>{
+if($('env').classList.contains('open'))return;
+
+$('env').classList.add('open');
+
+setTimeout(()=>{
+$('introLetter').classList.add('show');
+
+setTimeout(()=>{
+typeText($('typed'),`مش عارف الحكاية دي هتاخدنا لفين
+بس مبسوط إنك فيها.
+
+وأنا مش من النوع اللي بيحب يسيب الحاجات الحلوة تعدي وخلاص
+فـقولت أعملك حاجة تفضل تجمع كل اللي بينا
+من أول الحكاية
+وكل حاجة جاية بعدها.`)
+},650)
+
+},650)
+});
+
+$('toPassword').onclick=()=>{
+$('gate').classList.add('password-mode')
+};
+
+$('pwBtn').onclick=unlock;
+
+$('pw').addEventListener('keydown',e=>{
+if(e.key==='Enter')unlock()
+});
+
+async function unlock(){
+if($('pw').value!=='love'){
+$('pwError').textContent='الباسورد مش ده 😅';
+return
+}
+
+sessionStorage.setItem('fr_unlocked','1');
+$('gate').style.display='none';
+$('app').style.display='block';
+
+await init()
+}
+
+async function init(){
+try{
+remoteData=await apiGet()
+}catch(e){
+toast('الموقع محتاج ربط Vercel Storage الأول');
+return
+}
+
+buildOpen();
+renderPages();
+renderChat();
+renderMoments();
+initMomentPicker();
+renderSong();
+showPage(0)
+}
+
+function buildOpen(){
+$('openCards').innerHTML=
+openWhen.map((x,i)=>
+`<button class="open-card" onclick="openModal(${i},this)">
+<span class="env-mini">
+<span class="env-flap"></span>
+<span class="env-seal">♥</span>
+<span class="env-label">${escapeHtml(x[1])}</span>
+</span>
+<span class="card-paper">
+<small>Fares ♥ Roma</small>
+<b>افتحي الكارت ❤️</b>
+</span>
+</button>`
+).join('')
+}
+
+function openModal(i,el){
+if(el.classList.contains('opening'))return;
+
+el.classList.add('opening');
+
+setTimeout(()=>{
+$('modalTitle').textContent=openWhen[i][1];
+$('modalText').textContent=openWhen[i][2];
+$('modal').classList.add('show')
+},800)
+}
+
+function closeModal(){
+$('modal').classList.remove('show');
+
+setTimeout(()=>{
+document.querySelectorAll('.open-card.opening')
+.forEach(x=>x.classList.remove('opening'))
+},250)
+}
+
+function setSender(x){
+sender=x;
+
+$('senderRoma').classList.toggle('active',x==='roma');
+$('senderFares').classList.toggle('active',x==='fares');
+
+$('chatInput').placeholder=
+x==='roma'
+?'اكتبي رسالتك هنا...'
+:'اكتب رسالتك هنا...'
+}
+
+async function sendChat(){
+
+const text=$('chatInput').value.trim();
+
+if(!text)return;
+
+remoteData.chat.push({
+sender,
+text,
+time:new Date().toLocaleString('ar-EG',{
+dateStyle:'short',
+timeStyle:'short'
+})
+});
+
+try{
+
+await apiSave();
+
+$('chatInput').value='';
+renderChat();
+
+toast('اتحفظت الرسالة ❤️')
+
+}catch(e){
+
+remoteData.chat.pop();
+
+toast('حصلت مشكلة في الحفظ')
+
+}
+}
+
+function renderChat(){
+
+let a=remoteData.chat||[];
+
+$('chatList').innerHTML=a.length
+
+?a.map((m,i)=>
+`<div class="bubble ${m.sender==='roma'?'roma':'fares'}">
+
+<span>${escapeHtml(m.text)}</span>
+
+<span class="meta">
+${m.sender==='roma'?'Roma':'Fares'} · ${escapeHtml(m.time||'')}
+</span>
+
+<div class="item-actions">
+<button onclick="editChat(${i})">✏️ تعديل</button>
+<button class="danger" onclick="deleteChat(${i})">🗑️ حذف</button>
+</div>
+
+</div>`
+).join('')
+
+:'<div class="chat-empty">لسه مفيش رسايل هنا... ابدأوا الكلام من هنا ❤️</div>';
+
+$('chatList').scrollTop=$('chatList').scrollHeight
+}
+
+async function editChat(i){
+
+const m=remoteData.chat[i];
+
+if(!m)return;
+
+const next=prompt('عدّل الرسالة:',m.text||'');
+
+if(next===null)return;
+
+const text=next.trim();
+
+if(!text)return;
+
+const old=m.text;
+
+m.text=text;
+
+try{
+
+await apiSave();
+
+renderChat();
+
+toast('اتعدلت الرسالة ❤️')
+
+}catch(e){
+
+m.text=old;
+
+renderChat();
+
+toast('حصلت مشكلة في الحفظ')
+
+}
+}
+
+async function deleteChat(i){
+
+if(!confirm('تحذف الرسالة دي بس؟'))return;
+
+const old=[...remoteData.chat];
+
+remoteData.chat.splice(i,1);
+
+try{
+
+await apiSave();
+
+renderChat();
+
+toast('اتحذفت الرسالة')
+
+}catch(e){
+
+remoteData.chat=old;
+
+renderChat();
+
+toast('حصلت مشكلة في الحفظ')
+
+}
+}
+
+async function clearChat(){
+
+if(!confirm('تمسحوا كل الرسايل؟'))return;
+
+const old=[...remoteData.chat];
+
+remoteData.chat=[];
+
+try{
+
+await apiSave();
+
+renderChat();
+
+toast('المحادثة اتمسحت')
+
+}catch(e){
+
+remoteData.chat=old;
+
+renderChat();
+
+toast('حصلت مشكلة في الحفظ')
+
+}
+}
+
+function initMomentPicker(){
+
+const input=$('momentFiles');
+
+if(!input)return;
+
+input.onchange=()=>{
+
+momentSelectedFiles=[...input.files];
+
+$('momentPreview').innerHTML='';
+
+momentSelectedFiles.forEach(f=>{
+
+const r=new FileReader();
+
+r.onload=()=>{
+$('momentPreview')
+.insertAdjacentHTML('beforeend',`<img src="${r.result}">`)
+};
+
+r.readAsDataURL(f)
+
+})
+
+}
+}
+
+async function saveMomentForm(){
+
+const title=$('momentTitle').value.trim()||'ذكرى جديدة';
+const place=$('momentPlace').value.trim();
+const date=$('momentDate').value;
+const story=$('momentStory').value.trim();
+const files=[...momentSelectedFiles];
+
+try{
+
+const imgs=[];
+
+for(const f of files)
+imgs.push(await uploadFile(f));
+
+remoteData.moments.push({
+title,
+place,
+date,
+story,
+imgs
+});
+
+await apiSave();
+
+renderMoments();
+
+resetMomentForm();
+
+toast('اتضافت الذكرى ❤️')
+
+}catch(e){
+
+toast('حصلت مشكلة في رفع الذكرى')
+
+}
+}
+
+function resetMomentForm(){
+
+$('momentTitle').value='';
+$('momentPlace').value='';
+$('momentDate').value='';
+$('momentStory').value='';
+$('momentFiles').value='';
+$('momentPreview').innerHTML='';
+
+momentSelectedFiles=[]
+}
+
+function renderMoments(){
+
+let a=remoteData.moments||[];
+
+$('momentList').innerHTML=a.length
+
+?a.map((m,i)=>
+`<article class="moment">
+
+${(m.imgs||[]).map(s=>`<img src="${s}">`).join('')}
+
+<div class="moment-body">
+
+<h3>${escapeHtml(m.title)}</h3>
+
+<div class="moment-meta">
+${escapeHtml(m.place||'')}
+${m.date?' · '+escapeHtml(m.date):''}
+</div>
+
+<p>${escapeHtml(m.story||'')}</p>
+
+<div class="item-actions">
+<button onclick="editMoment(${i})">✏️ تعديل</button>
+<button class="danger" onclick="deleteMoment(${i})">🗑️ حذف الذكرى</button>
+</div>
+
+</div>
+</article>`
+).join('')
+
+:'<div class="card"><p>لسه بنجمع الذكريات...<br>بس أول واحدة لسه مستنيينها. ❤️</p></div>'
+}
+
+async function editMoment(i){
+
+const m=remoteData.moments[i];
+
+if(!m)return;
+
+const old={...m};
+
+const title=prompt('اسم الذكرى:',m.title||'');
+
+if(title===null)return;
+
+const place=prompt('المكان:',m.place||'');
+
+if(place===null)return;
+
+const date=prompt(
+'التاريخ (YYYY-MM-DD) — اتركه فارغًا لو مش عايز:',
+m.date||''
+);
+
+if(date===null)return;
+
+const story=prompt('وصف الذكرى:',m.story||'');
+
+if(story===null)return;
+
+m.title=title.trim()||'ذكرى جديدة';
+m.place=place.trim();
+m.date=date.trim();
+m.story=story.trim();
+
+try{
+
+await apiSave();
+
+renderMoments();
+
+toast('اتعدلت الذكرى ❤️')
+
+}catch(e){
+
+Object.assign(m,old);
+
+renderMoments();
+
+toast('حصلت مشكلة في الحفظ')
+
+}
+}
+
+async function deleteMoment(i){
+
+if(!confirm('تحذف الذكرى دي بس؟'))return;
+
+const old=[...remoteData.moments];
+
+remoteData.moments.splice(i,1);
+
+try{
+
+await apiSave();
+
+renderMoments();
+
+toast('اتحذفت الذكرى')
+
+}catch(e){
+
+remoteData.moments=old;
+
+renderMoments();
+
+toast('حصلت مشكلة في الحفظ')
+
+}
+}
+
+async function saveSong(){
+
+const title=$('songTitle').value.trim();
+const artist=$('songArtist').value.trim();
+const f=$('songFile').files[0];
+
+if(!title&&!f){
+toast('اكتبي اسم الأغنية أو اختاري الملف');
+return
+}
+
+try{
+
+const src=f?await uploadFile(f):'';
+
+remoteData.song={
+title:title||f.name.replace(/\.[^.]+$/,''),
+artist,
+src
+};
+
+await apiSave();
+
+renderSong();
+
+toast('اتحفظت الأغنية ❤️')
+
+}catch(e){
+
+toast('حصلت مشكلة في رفع الأغنية')
+
+}
+}
+
+function renderSong(){
+
+const x=remoteData.song;
+
+if(!x)return;
+
+$('songStatus').innerHTML=
+`<strong>${escapeHtml(x.title)}</strong>
+${x.artist?' · '+escapeHtml(x.artist):''}
+<br>أغنيتنا اتسجلت هنا ❤️`;
+
+$('songTitle').value=x.title||'';
+$('songArtist').value=x.artist||'';
+
+$('songPlayer').innerHTML=x.src
+?`<audio controls style="width:100%" src="${x.src}"></audio>`
+:'<div style="color:#9d8d93;font-size:12px">مفيش ملف صوتي مرفوع، بس اسم الأغنية محفوظ.</div>'
+}
+
+async function newPage(){
+
+const title=prompt('اسم الصفحة؟');
+
+if(!title)return;
+
+const text=prompt('اكتبي محتوى الصفحة؟','');
+
+remoteData.pages.push({
+title,
+text
+});
+
+try{
+
+await apiSave();
+
+renderPages();
+
+updateNav();
+
+showPage(allPageIds().length-1);
+
+toast('اتضافت الصفحة ❤️')
+
+}catch(e){
+
+remoteData.pages.pop();
+
+toast('حصلت مشكلة في الحفظ')
+
+}
+}
+
+function renderPages(){
+
+document.querySelectorAll('.custom-page').forEach(x=>x.remove());
+
+const holder=$('customPages');
+
+holder.innerHTML='';
+
+(remoteData.pages||[]).forEach((p,i)=>{
+
+let s=document.createElement('section');
+
+s.className='page custom-page';
+
+s.id='custom'+i;
+
+s.innerHTML=
+`<h2 class="section-title">${escapeHtml(p.title)}</h2>
+<div class="paper">
+<p>${escapeHtml(p.text||'')}</p>
+</div>`;
+
+holder.appendChild(s)
+
+})
+}
+
+if(sessionStorage.getItem('fr_unlocked')==='1'){
+$('gate').style.display='none';
+$('app').style.display='block';
+init()
+}
+
 </script>
-</body></html>
+</body>
+ </html>
